@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Root Menus -->
+        <!-- Contract View -->
+        <record id="hr_contract_form_inherit_r2" model="ir.ui.view">
+            <field name="name">hr.contract.view.form.inherit.r2</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+            	<page string="Information" position="after">
+            		<page string = "Quotité cessible">
+                        <group col="2" colspan="2">
+                            <!--field name="seniority"/-->
+                            <field name="employee_seniority"/>
+                            <field name="avance_quinze"/>
+                            <field name="avex"/>
+                            <field name="ppe"/>
+                            <field name="ph"/>
+                        </group>
+                        <button name="button_quotite" class="oe_inline oe_stat_button" string="Quotité" type="object" icon="fa-gears" />
+            		</page>
+                    <page string="Echéancier">
+                        <field colspan="4" name="employee_loan_request_ids" nolabel="1" context="{'default_contract_id': active_id}">
+                            <tree editable="top">
+                                <field name="request_id"/>
+                                <field name="approved_amount"/>
+                                <field name="somme_retenue"/>
+                                <field name="loan_interest"/>
+                                <field name="total_deduction"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="active"/>
+                            </tree>
+                            <form string="Echéancier">
+                                <group col="2" colspan="2">
+                                    <field name="contract_id"/>
+                                    <field name="employee_id"/>
+                                    <field name="request_id"/>
+                                    <field name="approved_amount"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="active"/>
+                                </group>
+                            </form>
+                        </field>
+                        <group col="2" colspan="2">
+                            <field name="retenue_avance_quinze"/>
+                            <field name="retenue_avex"/>
+                            <field name="retenue_ppe"/>
+                            <field name="retenue_ph"/>
+                        </group>
+                        <button name="button_update_loan" class="oe_inline oe_stat_button" string="Prêt" type="object" icon="fa-gears" />
+                    </page>
+                    <page string ="Arriérés">
+                        <field colspan="4" name="employee_backlog_ids" nolabel="1" context="{'default_contract_id': active_id}">
+                            <tree editable="top">
+                                <field name="request_id"/>
+                                <field name="backlog_amount"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="observation"/>
+                                <field name="active"/>
+                            </tree>
+                            <form string="Arriérés">
+                                <group col="2" colspan="2">
+                                    <field name="contract_id"/>
+                                    <field name="employee_id"/>
+                                    <field name="request_id"/>
+                                    <field name="backlog_amount"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                </group>
+                            </form>
+                        </field>
+                        <group col="2" colspan="2">
+                            <field name="retenue_arr"/>
+                            <field name="retenue_as_aro"/>
+                            <field name="retenue_assurance"/>
+                            <field name="retenue_divers"/>
+                            <field name="retenue_ksa"/>
+                            <field name="retenue_maladie"/>
+                            <field name="retenue_vam"/>
+                        </group>
+                        <button name="button_update_backlog" class="oe_inline oe_stat_button" string="Arriérés" type="object" icon="fa-gears" />
+                    </page>
+            	</page>
+            </field>
+        </record>
+    </data>
+</openerp>

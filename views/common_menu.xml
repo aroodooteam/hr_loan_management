@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<menuitem 
+    		id="menu_hr_employee_loan_root"
+    		parent="hr.menu_hr_root"
+    		name="Gestion de Prêts"
+    		groups="base.group_hr_manager,base.group_hr_user,base.group_user"
+    		sequence="10"/>
+    </data>
+</openerp>

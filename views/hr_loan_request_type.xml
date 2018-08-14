@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    	<menuitem id="hr_loan_configuration" parent="hr.menu_hr_configuration" name="Prêts"/>
+
+    	<!--Action du menu Type de prêts-->
+    	<record id="hr_loan_type_act" model="ir.actions.act_window">
+            <field name="name">Type de prêts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.loan.request.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Vue tree type de prêts -->
+        <record id="hr_loan_request_type_tree_view" model="ir.ui.view">
+            <field name="name">hr.loan.request.type.tree.view</field>
+            <field name="model">hr.loan.request.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Type Emprunt">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="rubrique_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue form type de prêts-->
+         <record id="hr_loan_request_type_form_view" model="ir.ui.view">
+            <field name="name">hr.loan.request.type.form.view</field>
+            <field name="model">hr.loan.request.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Type Emprunt">
+                    <sheet>
+                        <group>
+                            <group cols="4">
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="rubrique_id"/>
+                            <!--/group-->
+                            <!--group cols="4"-->
+                                <field name="duree_max"/>
+                                <field name="amount_max"/>
+                                <field name="cession_max"/>
+                                <field name="age_max"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="rate"/>
+                            <field name="limited_on_current_year"/>
+                            <field name="formule"/>
+                            <field name="formule_plafond"/>
+                            <field name="rub_code"/>
+                            <field name="constante"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue tree type de prêts -->
+        <record id="hr_backlog_type_tree_view" model="ir.ui.view">
+            <field name="name">hr.backlog.type.tree.view</field>
+            <field name="model">hr.backlog.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Type d'arriérés">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="rubrique_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue form type d arrieres-->
+         <record id="hr_backlog_type_form_view" model="ir.ui.view">
+            <field name="name">hr.backlog.type.form.view</field>
+            <field name="model">hr.backlog.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Type d'arriérés">
+                    <sheet>
+                        <group col="2" colspan="2">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="rubrique_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Action du menu Type d arriérés-->
+        <record id="hr_backlog_type_act" model="ir.actions.act_window">
+            <field name="name">Type d'arriérés'</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.backlog.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="hr_loan_type" parent="hr_loan_configuration" name="Types de prêts" action="hr_loan_type_act"/>
+        <menuitem id="hr_backlog_type" parent="hr_loan_configuration" name="Types d'arriérés" action="hr_backlog_type_act"/>
+
+
+    </data>
+</openerp>

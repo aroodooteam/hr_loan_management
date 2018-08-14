@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<!-- Vue form hr_employee_advantage_request-->
+        <record id="hr_employee_loan_request_form" model="ir.ui.view">
+            <field name="name">hr.employee.loan.request.form</field>
+            <field name="model">hr.loan.request</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Prêts">
+                    <sheet>
+                        <h1>
+                            <label string="Formulaire de demande de prêts"/>
+                        </h1>
+                	    <group col="2" colspan="2">
+                    	   <separator string="Demandeur" colspan="2"/>
+                                <field name="id" string='Demande n°'/>
+                                <field name="employee_id"/>
+                                <field name="contract_id"/>
+                                <field name="date_request"/>
+                                <field name="request_id"/>
+                                <field name="active"/>
+                        </group>
+                    <notebook colspan="4">
+                            <page string="Demande">
+                            	<group col="2" colspan="2">
+                            	   <field name="request_amount"/>
+                                   <field name="observation"/>
+                            	</group>
+                            </page>
+                           	<page string="Validation">
+                                <separator string="Quotité cessible" colspan="2"/>
+                            	<group col="4" colspan="4">
+                                    <field name="quotite_saisissable"/>
+                                    <!--field name="quotite_saisissable_restante" attrs ="{'invisible':['|',('request_id','=',1),('request_id','=',2),]}"/-->
+                                    <field name="duree_grande_avance" attrs ="{'invisible':[('request_id','!=',2)]}"/>
+                                </group>
+                                <separator string="Grande Avance" colspan="2" attrs ="{'invisible':[('request_id','!=',2)]}"/>
+                                <group col="6" colspan="6" attrs ="{'invisible':[('request_id','!=',2)]}">
+                                    <field name="total_avex"/>
+                                    <field name="total_ppe"/>
+                                    <field name="total_ph"/>
+                                </group>
+                                <separator string="Prêt Petit Equipement" colspan="2" attrs ="{'invisible':[('request_id','!=',3)]}"/>
+                                <group col="4" colspan="4" attrs ="{'invisible':[('request_id','!=',3)]}">
+                                    <field name="quotite_saisissable_restante"/>
+                                    <field name="capital_forme"/>
+                                </group>
+                                <separator string="Prêt hypothécaire" colspan="2" attrs ="{'invisible':[('request_id','!=',4)]}"/>
+                                <group col="6" colspan="6" attrs ="{'invisible':[('request_id','!=',4)]}">
+                                    <field name="quotite_engage"/>
+                                    <field name="quotite_ph_saisissable_restante"/>
+                                    <field name="quotite_conjoint"/>
+                                    <field name="capital_ph_dispo"/>
+                                    <field name="duree_ph"/>
+                                </group>
+                                <group col="2" colspan="2" attrs ="{'invisible':[('request_id','!=',4)]}">
+                                    <field name="type_credit"/>
+                                </group>
+                                <separator string="Accord" colspan="2"/>
+                                <group col="2" colspan="2">
+                            		<field name="approved_amount"/>
+                                    <field name="drh_notification"/>
+                                </group>
+                                <separator string="Echéance" colspan="2"/>
+                                <group col="6" colspan="6">
+                                    <!--separator string="Echéance" colspan="2"/-->
+                                    <field name="somme_retenue"/>
+                                    <field name="loan_interest"/>
+                                    <field name="total_deduction"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                            	</group>
+                                <button name="get_quotite_cessible" 
+                                             class="oe_inline oe_stat_button" 
+                                             string="Quotité Cessible" 
+                                             type="object" 
+                                             icon="fa-gears" />
+                                <button name="get_loan_deduction" 
+                                             class="oe_inline oe_stat_button" 
+                                             string="Retenue" 
+                                             type="object" 
+                                             icon="fa-gears" />
+                            </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue tree hr_employee_advantage_request-->
+        <record id="hr_employee_loan_request_tree" model="ir.ui.view">
+            <field name="name">hr.employee.loan.request.tree</field>
+            <field name="model">hr.loan.request</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Demande de prêts">
+                    <field name="date_request"/>
+                    <field name="contract_id"/>
+                    <field name="request_id"/>
+                    <field name="request_amount"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue search employee advantage request -->
+
+        <record id="hr_employee_loan_request_search" model="ir.ui.view">
+            <field name="name">hr.employee.loan.request.search</field>
+            <field name="model">hr.loan.request</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Demande de prêts">
+                    <field name="contract_id"/>
+                    <field name="request_id"/>
+                    <field name="active"/>
+                        <!--group string="Group By…">
+                        <filter string="Plan" name="group_plan" icon="terp-personal" domain="[]"
+                            context="{'group_by':'name'}"/>
+                        <filter string="Objectif" name="group_objectif" icon="terp-personal" domain="[]"
+                            context="{'group_by':'objectif_id'}"/>
+                        </group-->
+                    <filter name="filter_see_all" string="All" domain="['|',('active','=',True),('active','=',False)]"/>
+                    <filter name="filter_see_active" string="Actif" domain="[('active','=',True)]"/>
+                    <filter name="filter_see_inactive" string="Inactif" domain="[('active','=',False)]" />
+                </search>
+            </field>
+        </record>
+
+        <!-- Vue form hr_backlog-->
+        <record id="hr_backlog_form" model="ir.ui.view">
+            <field name="name">hr.backlog.form</field>
+            <field name="model">hr.backlog</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Arriérés">
+                    <sheet>
+                        <h1>
+                            <label string="Formulaire de saisie d'arriérés"/>
+                        </h1>
+                        <group col="2" colspan="2">
+                           <separator string="Demandeur" colspan="2"/>
+                                <!--field name="id" string='Demande n°'/-->
+                                <field name="employee_id"/>
+                                <field name="contract_id"/>
+                                <field name="request_id"/>
+                                <field name="backlog_amount"/>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                                <field name="backlog_status"/>
+                                <field name="observation"/>
+                                <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue tree hr_backlog-->
+        <record id="hr_backlog_tree" model="ir.ui.view">
+            <field name="name">hr.backlog.tree</field>
+            <field name="model">hr.backlog</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Saisie d'arriérés">
+                    <field name="employee_id"/>
+                    <field name="contract_id"/>
+                    <field name="request_id"/>
+                    <field name="backlog_amount"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="observation"/>
+                    <field name="backlog_status"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue search hr backlog -->
+
+        <record id="hr_backlog_search" model="ir.ui.view">
+            <field name="name">hrhr.backlog.search</field>
+            <field name="model">hr.backlog</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Demande de prêts">
+                    <field name="contract_id"/>
+                    <field name="request_id"/>
+                    <field name="active"/>
+                        <!--group string="Group By…">
+                        <filter string="Plan" name="group_plan" icon="terp-personal" domain="[]"
+                            context="{'group_by':'name'}"/>
+                        <filter string="Objectif" name="group_objectif" icon="terp-personal" domain="[]"
+                            context="{'group_by':'objectif_id'}"/>
+                        </group-->
+                    <filter name="filter_see_all" string="All" domain="['|',('active','=',True),('active','=',False)]"/>
+                    <filter name="filter_see_active" string="Actif" domain="[('active','=',True)]"/>
+                    <filter name="filter_see_inactive" string="Inactif" domain="[('active','=',False)]" />
+                </search>
+            </field>
+        </record>
+
+        <!-- Action du menu hr_backlog-->
+        <record model="ir.actions.act_window" id="action_gestion_backlog">
+            <field name="name">Saisie Arriérés</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.backlog</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,search</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Saisir un arriéré
+                </p>
+            </field>
+        </record>
+
+		<!-- Action du menu hr_employee_advantage_request-->
+        <record model="ir.actions.act_window" id="action_gestion_loan_request">
+            <field name="name">Demande de prêts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.loan.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,search</field>
+            <!--field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer une nouvelle carrière.
+                </p>
+            </field-->
+        </record>
+
+
+        <!-- Menu -->
+        <menuitem action="action_gestion_loan_request"
+                  id="menu_hr_loan_request"
+                  parent="menu_hr_employee_loan_root"
+                  groups="base.group_hr_manager,base.group_hr_user,base.group_user"/>
+        <menuitem action="action_gestion_backlog"
+                   id="menu_hr_backlog"
+                   parent="menu_hr_employee_loan_root"
+                   groups="base.group_hr_manager"/>
+    </data>
+</openerp>
