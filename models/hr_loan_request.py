@@ -76,7 +76,7 @@ class HrLoanRequest(models.Model):
     #loan_contract_id = fields.Many2one('hr.contract',string='Contrat')
     request_amount = fields.Float(string=u'Montant demandé',required=True)
     approved_amount = fields.Float(string=u'Montant accordé',required=True)
-    somme_retenue = fields.Float(string=u'Amortissement',required=True)
+    somme_retenue = fields.Float(string=u'Principal',required=True)
     date_request = fields.Datetime(string=u'Envoyé le',required=True)
     request_id = fields.Many2one('hr.loan.request.type',string=u'Type de prêt',required=True)
     #quotite_cessible = fields.Float(string=u'Quotité cessible',digits=(16, 2))
@@ -88,7 +88,7 @@ class HrLoanRequest(models.Model):
     capital_forme = fields.Float(string=u'Capital formé',digits=(16, 2))
     capital_ph_dispo = fields.Float(string=u'Capital disponible',digits=(16, 2))
     duree_ph = fields.Integer(string=u'Durée')
-    duree_grande_avance = fields.Integer(string=u'Mensualité',required=True)
+    duree_grande_avance = fields.Integer(string=u'Mensualité')
     loan_interest = fields.Float(string=u'Intérêt',digits=(16, 2))
     total_deduction = fields.Float(string=u'Retenue sur salaire',digits=(16, 2))
     total_ppe = fields.Float(string=u'PPE en Cours',digits=(16, 2))
@@ -303,7 +303,7 @@ class HrLoanRequest(models.Model):
                         i+=1
                     loan_deduction= sum(res_interest) /  avex_period
             else:
-                raise Warning('Veuillez renseigner le champ Retenue Principale')
+                raise Warning('Veuillez renseigner le champ Montant accordé')
             employee_request.somme_retenue=avex_amort
             employee_request.loan_interest=loan_deduction
             employee_request.total_deduction=avex_amort+loan_deduction

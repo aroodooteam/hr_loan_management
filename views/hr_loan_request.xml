@@ -33,8 +33,14 @@
                             	<group col="4" colspan="4">
                                     <field name="quotite_saisissable"/>
                                     <!--field name="quotite_saisissable_restante" attrs ="{'invisible':['|',('request_id','=',1),('request_id','=',2),]}"/-->
-                                    <field name="duree_grande_avance" attrs ="{'invisible':[('request_id','!=',2)]}"/>
+                                    <!--field name="duree_grande_avance" attrs ="{'invisible':[('request_id','!=',2)]}"/-->
+                                    <field name="duree_grande_avance"/>
                                 </group>
+                                <button name="get_quotite_cessible" 
+                                             class="oe_inline oe_stat_button" 
+                                             string="Quotité Cessible" 
+                                             type="object" 
+                                             icon="fa-gears"/>
                                 <separator string="Grande Avance" colspan="2" attrs ="{'invisible':[('request_id','!=',2)]}"/>
                                 <group col="6" colspan="6" attrs ="{'invisible':[('request_id','!=',2)]}">
                                     <field name="total_avex"/>
@@ -71,11 +77,6 @@
                                     <field name="date_start"/>
                                     <field name="date_end"/>
                             	</group>
-                                <button name="get_quotite_cessible" 
-                                             class="oe_inline oe_stat_button" 
-                                             string="Quotité Cessible" 
-                                             type="object" 
-                                             icon="fa-gears" />
                                 <button name="get_loan_deduction" 
                                              class="oe_inline oe_stat_button" 
                                              string="Retenue" 
@@ -95,10 +96,13 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Demande de prêts">
-                    <field name="date_request"/>
                     <field name="contract_id"/>
                     <field name="request_id"/>
-                    <field name="request_amount"/>
+                    <field name="approved_amount"/>
+                    <field name="somme_retenue"/>
+                    <field name="loan_interest"/>
+                    <field name="total_deduction"/>
+                    <field name="date_end"/>
                     <field name="active"/>
                 </tree>
             </field>
@@ -115,12 +119,12 @@
                     <field name="contract_id"/>
                     <field name="request_id"/>
                     <field name="active"/>
-                        <!--group string="Group By…">
-                        <filter string="Plan" name="group_plan" icon="terp-personal" domain="[]"
-                            context="{'group_by':'name'}"/>
-                        <filter string="Objectif" name="group_objectif" icon="terp-personal" domain="[]"
-                            context="{'group_by':'objectif_id'}"/>
-                        </group-->
+                        <group string="Group By…">
+                        <filter string="Nom" name="group_contract" icon="terp-personal" domain="[]"
+                            context="{'group_by':'contract_id'}"/>
+                        <!--filter string="Objectif" name="group_objectif" icon="terp-personal" domain="[]"
+                            context="{'group_by':'objectif_id'}"/-->
+                        </group>
                     <filter name="filter_see_all" string="All" domain="['|',('active','=',True),('active','=',False)]"/>
                     <filter name="filter_see_active" string="Actif" domain="[('active','=',True)]"/>
                     <filter name="filter_see_inactive" string="Inactif" domain="[('active','=',False)]" />
